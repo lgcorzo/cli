@@ -1,4 +1,4 @@
-module github.com/minio/cli
+module github.com/lgcorzo/cli
 
 go 1.12
 
