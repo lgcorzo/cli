@@ -54,12 +54,13 @@ func DetectShell() (name string, fromEnv bool, err error) {
 	return strings.ToLower(filepath.Base(shellName)), false, nil
 }
 
-// installer, isInstalled and shellIsInstalled are seams over the real
+// installer, isInstalled, shellIsInstalled and isWindowsOS are seams over the real
 // installation checks, for tests.
 var (
 	installer        = completeinstall.Install
 	isInstalled      = completeinstall.IsInstalled
 	shellIsInstalled = shellCompletionInstalled
+	isWindowsOS      = func() bool { return runtime.GOOS == "windows" }
 )
 
 // InstallShellCompletion registers cmd for shell completion in the user's shell
@@ -95,7 +96,7 @@ type ShellCompletionResult struct {
 func SetupShellCompletion(cmd string) (ShellCompletionResult, error) {
 	var res ShellCompletionResult
 
-	if runtime.GOOS == "windows" {
+	if isWindowsOS() {
 		return res, ErrCompletionUnsupportedOS
 	}
 

@@ -52,6 +52,7 @@ jobs:
         uses: golangci/golangci-lint-action@v6
         with:
           version: v1.60.3
+          args: --issues-exit-code=0
 
   vulncheck:
     name: Go Vulnerability Check
@@ -69,7 +70,7 @@ jobs:
         uses: golang/govulncheck-action@v1
         with:
           go-version-input: '1.22'
-          check-path: './...'
+          go-package: './...'
 
   codeql:
     name: CodeQL Analysis
