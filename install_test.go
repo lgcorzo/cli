@@ -56,7 +56,15 @@ func withFakeHome(t *testing.T, bin string) string {
 	return dir
 }
 
+func withNotWindows(t *testing.T) {
+	t.Helper()
+	old := isWindowsOS
+	isWindowsOS = func() bool { return false }
+	t.Cleanup(func() { isWindowsOS = old })
+}
+
 func TestSetupShellCompletionFreshInstall(t *testing.T) {
+	withNotWindows(t)
 	t.Setenv("SHELL", "/bin/bash")
 	withInstaller(t, func(cmd string) error { return nil })
 
@@ -76,6 +84,7 @@ func TestSetupShellCompletionFreshInstall(t *testing.T) {
 // because some *other* shell's config already had it — Install() always
 // runs, and only a post-install disk check decides AlreadyInstalled.
 func TestSetupShellCompletionAlreadyInstalled(t *testing.T) {
+	withNotWindows(t)
 	t.Setenv("SHELL", "/bin/bash")
 	withInstaller(t, func(cmd string) error {
 		return errors.New("1 error occurred: * already installed in /home/user/.bashrc")
@@ -94,6 +103,7 @@ func TestSetupShellCompletionAlreadyInstalled(t *testing.T) {
 // A genuine install failure (not just some shell already having it) must
 // propagate: the post-install disk check finds nothing installed either.
 func TestSetupShellCompletionPropagatesGenuineFailure(t *testing.T) {
+	withNotWindows(t)
 	t.Setenv("SHELL", "/bin/bash")
 	wantErr := errors.New("open /home/user/.bashrc: permission denied")
 	withInstaller(t, func(cmd string) error { return wantErr })
@@ -109,6 +119,7 @@ func TestSetupShellCompletionPropagatesGenuineFailure(t *testing.T) {
 }
 
 func TestSetupShellCompletionUnsupportedShell(t *testing.T) {
+	withNotWindows(t)
 	t.Setenv("SHELL", "/usr/bin/tcsh")
 	// installer must not even be consulted for an unsupported shell.
 	withInstaller(t, func(cmd string) error {
@@ -126,6 +137,7 @@ func TestSetupShellCompletionUnsupportedShell(t *testing.T) {
 // *other* shell is already registered — the package-wide IsInstalled would
 // report true there and hide the failure.
 func TestSetupShellCompletionFailureForDetectedShell(t *testing.T) {
+	withNotWindows(t)
 	t.Setenv("SHELL", "/bin/bash")
 	wantErr := errors.New("open /home/user/.bashrc: permission denied")
 	withInstaller(t, func(cmd string) error { return wantErr })
