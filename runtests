@@ -10,7 +10,7 @@ from subprocess import check_call, check_output
 
 
 PACKAGE_NAME = os.environ.get(
-    'CLI_PACKAGE_NAME', 'github.com/minio/cli/v2'
+    'CLI_PACKAGE_NAME', 'github.com/lgcorzo/cli/v2'
 )
 
 
