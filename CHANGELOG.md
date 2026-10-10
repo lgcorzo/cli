@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [1.24.3] - 2026-10-09
+
+### Security
+- Upgraded indirect dependencies (`github.com/hashicorp/errwrap` to `v1.1.0` and `github.com/hashicorp/go-multierror` to `v1.1.1`).
+- Performed security scan audit using `govulncheck` and static analysis check using `go vet`.
+
 ## [1.19.1] - 2016-11-21
 
 ### Fixed
