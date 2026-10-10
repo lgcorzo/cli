@@ -396,7 +396,7 @@ func (c *Context) GlobalInt(name string) int {
 func lookupInt(name string, set *flag.FlagSet) int {
 	f := set.Lookup(name)
 	if f != nil {
-		parsed, err := strconv.ParseInt(f.Value.String(), 0, 64)
+		parsed, err := strconv.ParseInt(f.Value.String(), 0, 0)
 		if err != nil {
 			return 0
 		}
@@ -741,7 +741,7 @@ func (c *Context) GlobalUint(name string) uint {
 func lookupUint(name string, set *flag.FlagSet) uint {
 	f := set.Lookup(name)
 	if f != nil {
-		parsed, err := strconv.ParseUint(f.Value.String(), 0, 64)
+		parsed, err := strconv.ParseUint(f.Value.String(), 0, 0)
 		if err != nil {
 			return 0
 		}

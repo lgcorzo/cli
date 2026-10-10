@@ -44,7 +44,7 @@
     "name": "Int",
     "type": "int",
     "context_default": "0",
-    "parser": "strconv.ParseInt(f.Value.String(), 0, 64)",
+    "parser": "strconv.ParseInt(f.Value.String(), 0, 0)",
     "parser_cast": "int(parsed)"
   },
   {
@@ -87,7 +87,7 @@
     "name": "Uint",
     "type": "uint",
     "context_default": "0",
-    "parser": "strconv.ParseUint(f.Value.String(), 0, 64)",
+    "parser": "strconv.ParseUint(f.Value.String(), 0, 0)",
     "parser_cast": "uint(parsed)"
   }
 ]
