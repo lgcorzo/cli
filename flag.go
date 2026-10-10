@@ -370,7 +370,7 @@ func (f IntFlag) Apply(set *flag.FlagSet) error {
 		for _, envVar := range strings.Split(f.EnvVar, ",") {
 			envVar = strings.TrimSpace(envVar)
 			if envVal, ok := syscall.Getenv(envVar); ok {
-				envValInt, err := strconv.ParseInt(envVal, 0, 0)
+				envValInt, err := strconv.ParseInt(envVal, 0, strconv.IntSize)
 				if err != nil {
 					return fmt.Errorf("could not parse %s as int value for flag %s: %s", envVal, f.Name, err)
 				}
@@ -425,7 +425,7 @@ func (f UintFlag) Apply(set *flag.FlagSet) error {
 		for _, envVar := range strings.Split(f.EnvVar, ",") {
 			envVar = strings.TrimSpace(envVar)
 			if envVal, ok := syscall.Getenv(envVar); ok {
-				envValInt, err := strconv.ParseUint(envVal, 0, 0)
+				envValInt, err := strconv.ParseUint(envVal, 0, strconv.IntSize)
 				if err != nil {
 					return fmt.Errorf("could not parse %s as uint value for flag %s: %s", envVal, f.Name, err)
 				}
