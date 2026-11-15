@@ -1,3 +1,5 @@
+Maintained fork of [minio/cli](https://github.com/minio/cli). It applies security patches and maintenance fixes on top of upstream. Part of the [Dark Gravity](https://github.com/lgcorzo/rust_CACD_autonomous_factory) factory. License: Apache-2.0.
+
 cli
 ===
 
@@ -297,3 +299,10 @@ func main() {
 ## Contribution Guidelines
 
 Pull requests and contributions are welcome. Please ensure all commits follow imperative style and that unit tests pass across all target environments (`go test -v -race ./...`).
+
+---
+
+### Fork Maintenance & Agent Transparency
+
+- **Changes vs. Upstream:** Security dependency updates, CI/CD workflow fixes, and CodeQL remediation are tracked in the [commit history](https://github.com/lgcorzo/cli/commits) and [Pull Requests](https://github.com/lgcorzo/cli/pulls?q=is%3Apr).
+- **Agent Tagging (`[agent]`):** Commits and pull requests generated automatically by agents in the Dark Gravity pipeline are prefixed with `[agent]` to distinguish automated maintenance from manual work.
